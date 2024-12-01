@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Contrat</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #1e90ff, #00bfff);
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        form {
+            max-width: 600px;
+            width: 90%;
+            margin: 0 auto;
+            background: #fff;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: slideIn 1s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        button {
+            cursor: pointer;
+            background: #3498db;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #2980b9;
+            transform: scale(1.02);
+        }
+
+        .generate-button {
+            margin-top: 20px;
+        }
+
+        /* Toggle Slider Styles */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 70px;
+            height: 34px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            border-radius: 34px;
+            transition: 0.4s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.4s;
+        }
+
+        input:checked + .slider {
+            background-color: #3498db;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(36px);
+        }
+
+        input + .slider::after {
+            content: "..... NON";
+        }
+
+        input:checked + .slider::after {
+            content: "OUI .....";
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            form {
+                padding: 20px;
+            }
+
+            button {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+    
+
+<body>
+    <h1>Générateur de Contrat de Remplacement</h1>
+    <form id="contractForm">
+        <!-- Input fields -->
+        <div class="form-group">
+            <label for="drx">Nom du Médecin Remplacé :</label>
+            <input type="text" id="drx" name="drx" required placeholder="Exemple : Docteur Nom prenom 1">
+        </div>
+        <div class="form-group">
+            <label for="spex">Spécialité du Remplacé :</label>
+            <input type="text" id="spex" name="spex" required placeholder="Exemple : spécialiste en médecine générale">
+        </div>
+        <div class="form-group">
+            <label for="rppsx">RPPS du Remplacé :</label>
+            <input type="text" id="rppsx" name="rppsx" required maxlength="11" placeholder="Exemple: 12345678910">
+        </div>
+        <div class="form-group">
+            <label for="adrx">Adresse du Remplacé :</label>
+            <input type="text" id="adrx" name="adrx" required placeholder="Exemple : 10 rue du cabinet, 123457, Rempland">
+        </div>
+        <div class="form-group"></div>
+        <label>
+                Le Remplaçant est un étudiant en médecine titulaire d'une licence de remplacement
+            </label>
+            <label class="toggle-switch">
+                <input type="checkbox" id="inty" name="inty">
+                <span class="slider"><span></span><span></span></span>
+            </label>
+            </div>
+        <div class="form-group">
+            <label for="dry">Nom du Médecin Remplaçant :</label>
+            <input type="text" id="dry" name="dry" required placeholder="Exemple : Docteur/Interne Nom Prenom 2">
+        </div>
+        <div class="form-group">
+            <label for="spey">Spécialité du Remplaçant :</label>
+            <input type="text" id="spey" name="spey" required placeholder="Exemple : Spécialiste/Interne en médecine générale">
+        </div>
+        <div class="form-group">
+            <label for="rppsy">RPPS du Remplaçant :</label>
+            <input type="text" id="rppsy" name="rppsy" required maxlength="11" placeholder="Exemple: 12345678911">
+        </div>
+        <div class="form-group">
+            <label for="adry">Adresse du Remplaçant :</label>
+            <input type="text" id="adry" name="adry" required placeholder="Exemple : 1 rue du cabinet, 123456, Rempland">
+        </div>
+        <div class="form-group">
+            <label for="retro">Rétrocession (%) :</label>
+            <input type="number" id="retro" name="retro" required min="0" max="100" placeholder="Exemple : 75">
+        </div>
+        <div class="form-group">
+            <label for="drx">Date du remplacemet :</label>
+            <input type="text" id="rdate" name="rdate" required placeholder="Remplir la période ou la/les date(s) du remplacements">
+        </div>
+        <div class="form-group">
+            <label>
+                Renoncer à la clause de non-concurrence
+            </label>
+            <label class="toggle-switch">
+                <input type="checkbox" id="clause" name="clause">
+                <span class="slider"><span></span><span></span></span>
+            </label>
+        </div>
+        
+       
+    </form>
+
+   
+
+    <button id="create-file">Générer un contrat</button>
+
+    <script>
+
+        const f = () => {
+            const drx = document.getElementById('drx').value;
+            const rdate = document.getElementById('rdate').value;
+            const spex = document.getElementById('spex').value
+            const rppsx = document.getElementById('rppsx').value;
+            const adrx = document.getElementById('adrx').value;
+            const dry = document.getElementById('dry').value;
+            const spey = document.getElementById('spey').value;
+            const rppsy = document.getElementById('rppsy').value;
+            const adry = document.getElementById('adry').value;
+            const retro = document.getElementById('retro').value;
+            const clause = document.getElementById('clause').checked;
+            const inty = document.getElementById('inty').checked;
+            
+        }
+
+
+        document.getElementById('create-file').addEventListener('click', function () {
+            // Contenu HTML à écrire dans le fichier
+            const content = `
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contrat de remplacement</title>
+    <style>
+        /* Votre CSS existant */
+
+        /* Style du bouton flottant */
+        .floating-print-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
+        }
+
+        .floating-print-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Numérotation des pages */
+        @media print {
+            body {
+                counter-reset: page;
+                margin: 0;
+            }
+
+            .page {
+                counter-increment: page;
+                position: relative;
+                page-break-after: always;
+                padding: 20mm;
+                box-sizing: border-box;
+            }
+
+            .page::after {
+                content: "Page " counter(page);
+                position: absolute;
+                bottom: 10mm; /* Ajustez cette valeur si nécessaire */
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 12pt;
+            }
+
+            @page {
+                margin: 10mm;
+            }
+
+            /* Cache le bouton d'impression lors de l'impression */
+            .floating-print-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenu de la page -->
+
+<div class="page">
+    <div style="clear:both;">
+        <div style="float:left;">
+            <p style="margin-top:0pt; margin-bottom:0pt;"></p>
+        </div>
+        <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; line-height:12pt;"><span
+                style="font-family:Courier; font-size:12pt;"></span></p>
+    </div>
+    <p style="margin-top:0pt; margin-bottom:30pt; text-align:center; font-size:11pt;"><img
+            src="data:image/png;base64,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"
+            width="104" height="77" alt=""></p>
+    <p style="margin-top:30pt; margin-bottom:0pt; text-align:center; font-size:11pt; background-color:#b3b3b3;">
+        <strong><span style="font-family:Arial; color:#0000ff;">Mod&egrave;le de contrat de
+                remplacement</span></strong><br><strong><span style="font-family:Arial; color:#0000ff;">en exercice
+                lib&eacute;ral</span></strong></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:center;"><span style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:center;"><span style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:12pt; text-align:center;"><span style="font-family:Arial;">Articles
+            R.4127-65 et R.4127-91 du code de la sant&eacute; publique (code de d&eacute;ontologie
+            m&eacute;dicale)</span></p>
+    <p style="margin-top:12pt; margin-bottom:0pt; text-align:right; font-size:8pt;"><u><span
+                style="font-family:Arial;">adopt&eacute; le 9 f&eacute;vrier 1996</span></u></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:right; font-size:8pt;"><u><span
+                style="font-family:Arial;">maj 2 octobre 2008</span></u></p>
+    <p style="margin-top:0pt; margin-bottom:12pt; text-align:right; font-size:8pt;"><u><span
+                style="font-family:Arial;">maj 10 septembre 2020</span></u></p>
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:center; font-size:11pt;"><strong><span
+                style="font-family:Arial;">- </span></strong><strong><span
+                style="font-family:Arial; color:#0000ff;">${inty.checked?"Remplacement par un(e) &eacute;tudiant(e) en m&eacute;decine titulaire d'une licence de remplacement":""}${inty.checked===false?"Remplacement par un(e) docteur(e) en m&eacute;decine inscrit(e) au Tableau":""}</span></strong><strong><span style="font-family:Arial;"> -</span></strong></p>
+    <h2 style="margin-top:12pt; margin-bottom:12pt; page-break-after:avoid; font-size:11pt;"><em><span
+                style="font-family:Arial; font-weight:normal;">Entre</span></em></h2>
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">${drx.value}, ${spex.value}, inscrit au Tableau de l&rsquo;Ordre des M&eacute;decins sous le
+            num&eacute;ro ${rppsx.value}, exer&ccedil;ant au ${adrx.value}</span></p>
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:right; font-size:11pt;"><span
+            style="font-family:Arial;">d&apos;une part</span></p>
+    <h2 style="margin-top:12pt; margin-bottom:12pt; page-break-after:avoid; font-size:11pt;"><em><span
+                style="font-family:Arial; font-weight:normal;">Et</span></em></h2>
+    <p style="margin-top:12pt; margin-bottom:12pt; font-size:11pt;"><span style="font-family:Arial;">${dry.value}, ${spey.value}, inscrit
+            au Tableau de l&rsquo;Ordre des M&eacute;decins sous le num&eacute;ro ${rppsy.value}, r&eacute;sidant au ${adry.value}</span>
+            </p>
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:right; font-size:11pt;"><span
+            style="font-family:Arial;">d&apos;autre part</span></p>
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:center; font-size:11pt;"><strong><span
+                style="font-family:Arial;">PREAMBULE</span></strong></p>
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Dans le souci de respecter l&apos;obligation d&eacute;ontologique qui est la
+            sienne d&apos;assurer la permanence des soins et conform&eacute;ment aux dispositions de l&apos;article
+            R.4127-65 du code de la sant&eacute; publique (code de d&eacute;ontologie m&eacute;dicale), ${drx.value} a
+            contact&eacute; ${dry.value} m&eacute;decin rempla&ccedil;ant(e) pour prendre en charge, lors de la cessation
+            temporaire de son activit&eacute; professionnelle habituelle, les patients qui feraient appel &agrave;
+            elle/lui.</span></p>
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Pour permettre le bon d&eacute;roulement de ce remplacement, ${drx.value} met &agrave; la
+            disposition de la ${dry.value} son cabinet de consultation, sis ${adrx.value} et son secr&eacute;tariat.</span></p>
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">${dry.value} assume de ce fait toutes les obligations inscrites dans le code de
+            d&eacute;ontologie. Elle/Il ne peut ali&eacute;ner son ind&eacute;pendance professionnelle sous quelque
+            forme que ce soit.</span></p>
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:center; font-size:11pt;"><strong><span
+                style="font-family:Arial;">Il a &eacute;t&eacute; convenu ce qui suit :</span></strong></p>
+    <p style="margin-top:12pt; margin-bottom:12pt; font-size:11pt;"><strong><span
+                style="font-family:Arial;">&nbsp;</span></strong></p>
+    <p style="margin-top:12pt; margin-bottom:0pt; font-size:11pt;"><strong><u><span style="font-family:Arial;">Article
+                    ler</span></u></strong></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Dans le souci de la permanence des soins, ${drx.value} charge ${dry.value}, qui accepte, de la/le
+            remplacer temporairement aupr&egrave;s des patients qui feraient appel &agrave; elle/lui.</span></p>
+
+
+        </div>
+ 
+        <div class="page">
+
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Les patients doivent &ecirc;tre avertis, d&egrave;s que possible, de la
+            pr&eacute;sence d&rsquo;un(e) rempla&ccedil;ant(e), notamment lors de toute demande de visite &agrave;
+            domicile ou de rendez-vous au cabinet m&eacute;dical.</span></p>
+
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">${dry.value} doit consacrer &agrave; cette activit&eacute; tout le temps n&eacute;cessaire
+            selon des modalit&eacute;s qu&apos;elle/il fixe librement</span><a name="_ftnref1"></a><a href="#_ftn1"
+            style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:7.33pt; color:#000000;"><sup>[1]</sup></span></a><span
+            style="font-family:Arial;">. Elle/Il peut, avec l&apos;accord pr&eacute;alable de&nbsp;</span><span
+            style="font-family:Arial; font-size:10pt;">${drx.value}</span><span style="font-family:Arial;">, exercer une autre
+            activit&eacute; m&eacute;dicale, y compris dans les locaux de&nbsp;</span><span
+            style="font-family:Arial; font-size:10pt;">${drx.value}</span><span style="font-family:Arial;"></span><a
+            name="_ftnref2"></a><a href="#_ftn2" style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:7.33pt; color:#000000;"><sup>[2]</sup></span></a><span
+            style="font-family:Arial;">&nbsp;</span><a name="_ftnref3"></a><a href="#_ftn3"
+            style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:7.33pt; color:#000000;"><sup>[3]</sup></span></a></p>
+
+
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Elle/Il s&apos;engage &agrave; donner, &agrave; tout malade faisant appel
+            &agrave; elle/lui, des soins consciencieux et attentifs dans le respect des dispositions du code de
+            d&eacute;ontologie.</span></p>
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Hors le cas d&apos;urgence, le/la rempla&ccedil;ant(e) peut, dans les conditions
+            de l&apos;article R.4127-47 du code de la sant&eacute; publique (code de d&eacute;ontologie
+            m&eacute;dicale), refuser ses soins pour des raisons professionnelles ou personnelles.</span></p>
+    <p style="margin-top:12pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><strong><u><span
+                    style="font-family:Arial;">Article 2</span></u></strong></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Le pr&eacute;sent contrat de remplacement est pr&eacute;vu pour la/les
+            p&eacute;riode(s)</span><span style="font-family:Arial;">&nbsp;</span><span
+            style="font-family:Arial;">:</span><br><span style="font-family:Arial;">- ${rdate.value}</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><em><span
+                style="font-family:Arial;">En cas de remplacement r&eacute;gulier de courte dur&eacute;e,
+                pr&eacute;ciser ici le/les jour(s) ou la/ les demi-journ&eacute;e(s) de remplacement.</span></em></p>
+    <p style="margin-top:12pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><strong><u><span
+                    style="font-family:Arial;">Article 3</span></u></strong></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Pendant la dur&eacute;e du pr&eacute;sent contrat de remplacement et pour les
+            besoins de son ex&eacute;cution,&nbsp;</span><span style="font-family:Arial; font-size:10pt;">${dry.value}</span><span
+            style="font-family:Arial;"> a l&apos;usage des locaux professionnels, installations et appareils
+            que&nbsp;</span><span style="font-family:Arial; font-size:10pt;">${drx.value}</span><span
+            style="font-family:Arial;">&hellip; met &agrave; sa disposition. Elle/Il en fait un usage
+            raisonnable.&nbsp;</span></p>
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Compte tenu du caract&egrave;re par nature provisoire de l&apos;activit&eacute;
+            de la rempla&ccedil;ante/du rempla&ccedil;ant, celle-ci/celui-ci s&apos;interdit toute modification des
+            lieux ou de leur destination.</span></p>
+    <h1 style="margin-top:12pt; margin-bottom:0pt; text-align:justify; page-break-after:avoid; font-size:11pt;"><u><span
+                style="font-family:Arial;">Article 4</span></u></h1>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial; font-size:10pt;">${dry.value}</span><span style="font-family:Arial;">&nbsp;exerce son art
+            en toute ind&eacute;pendance. Elle/Il est seul(e) responsable vis-&agrave;-vis des patients et des tiers des
+            cons&eacute;quences de son exercice professionnel et conserve seul(e) la responsabilit&eacute; de son
+            activit&eacute; professionnelle pour laquelle elle/il s&apos;assure personnellement &agrave; ses frais
+            &agrave; une compagnie notoirement solvable. Elle/Il doit apporter la preuve de cette assurance avant le
+            d&eacute;but de son activit&eacute;.</span><a name="_ftnref4"></a><a href="#_ftn4"
+            style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:7.33pt; color:#000000;"><sup>[4]</sup></span></a></p>
+    <h1 style="margin-top:12pt; margin-bottom:0pt; text-align:justify; page-break-after:avoid; font-size:11pt;"><u><span
+                style="font-family:Arial;">Article 5</span></u></h1>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">${dry.value} utilise conform&eacute;ment &agrave; la convention nationale les ordonnances
+            ainsi que les feuilles de soins et imprim&eacute;s pr&eacute;-identifi&eacute;s au nom de
+            ${drx.value}&hellip;</span><span style="font-family:'Comic Sans MS';">&nbsp;</span><span
+            style="font-family:Arial;">et/ou sa propre CPS</span><a name="_ftnref5"></a><a href="#_ftn5"
+            style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:7.33pt; color:#000000;"><sup>[5]</sup></span></a><span
+            style="font-family:Arial;">&nbsp;&nbsp;&nbsp;</span><span style="font-family:Arial;">dans son
+            activit&eacute; relative aux seuls patients de ${drx.value}</span></p>
+    <p style="margin-top:12pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">En outre, elle/il doit faire mention de son identification personnelle sur les
+            ordonnances, feuilles de soins et imprim&eacute;s r&eacute;glementaires qu&apos;elle/il sera amen&eacute;(e)
+            &agrave; remplir.</span></p>
+    <p style="margin-top:12pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><strong><u><span
+                    style="font-family:Arial;">Article 6</span></u></strong></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Les deux co-contractant(e)s proc&egrave;dent &agrave; des d&eacute;clarations
+            fiscales et sociales ind&eacute;pendantes et supportent personnellement, chacun(e) en ce qui les concerne,
+            la totalit&eacute; de leurs charges fiscales et sociales aff&eacute;rentes au dit remplacement.</span></p>
+
+
+            <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+                style="font-family:Arial;">&nbsp;</span></p>
+    
+        </div>
+        <div class="page">
+
+
+
+    <h1 style="margin-top:12pt; margin-bottom:0pt; text-align:justify; page-break-after:avoid; font-size:11pt;"><u><span
+                style="font-family:Arial;">Article 7</span></u></h1>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial; font-size:10pt;">${dry.value}</span><span style="font-family:Arial;"> per&ccedil;oit
+            l&apos;ensemble des honoraires correspondant aux actes effectu&eacute;s sur les patients &agrave; qui
+            elle/il a donn&eacute; ses soins.</span></p>
+
+
+
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Elle/Il doit remplir les obligations comptables normales et habituelles qui lui
+            sont impos&eacute;es r&eacute;glementairement.</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">En fin de remplacement, ${drx.value} reverse &agrave; ${dry.value} ${retro.value} % du total des honoraires
+            per&ccedil;us et &agrave; percevoir correspondant au remplacement</span><a name="_ftnref6"></a><a
+            href="#_ftn6" style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:7.33pt; color:#000000;"><sup>[6]</sup></span></a><span
+            style="font-family:Arial;">.</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">En cas de participation, au cours du remplacement, &agrave; la permanence des
+            soins ambulatoire, le montant de la r&eacute;mun&eacute;ration d&rsquo;astreinte est d&ucirc; &agrave; ${dry.value}
+            qui a ex&eacute;cut&eacute; la/les garde(s).&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Conform&eacute;ment aux dispositions de l&apos;article R.4127-66 du code de la
+            sant&eacute; publique (code de d&eacute;ontologie m&eacute;dicale), le remplacement termin&eacute;, la/le
+            rempla&ccedil;ant(e) doit cesser toute activit&eacute; s&apos;y rapportant et transmettre les informations
+            n&eacute;cessaires &agrave; la continuit&eacute; des soins.</span></p>
+    <h1 style="margin-top:12pt; margin-bottom:0pt; text-align:justify; page-break-after:avoid; font-size:11pt;"><u><span
+                style="font-family:Arial;">Article 8&nbsp;</span></u></h1>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Aux termes de l&rsquo;article R4127-86 du code de la sant&eacute; publique (code
+            de d&eacute;ontologie m&eacute;dicale),</span><span style="font-size:10pt;">&nbsp;</span><span
+            style="font-family:Arial;">un &laquo;</span><span style="font-family:Arial;">&nbsp;</span><em><span
+                style="font-family:Arial;">m&eacute;decin ou un &eacute;tudiant qui a remplac&eacute; un de ses
+                confr&egrave;res pendant trois mois, cons&eacute;cutifs ou non, ne doit pas, pendant une p&eacute;riode
+                de deux ans, s&apos;installer dans un cabinet o&ugrave; il puisse entrer en concurrence directe avec le
+                m&eacute;decin remplac&eacute; et avec les m&eacute;decins qui, le cas &eacute;ch&eacute;ant, exercent
+                en association avec ce dernier, &agrave; moins qu&apos;il n&apos;y ait entre les
+                int&eacute;ress&eacute;s un accord qui doit &ecirc;tre notifi&eacute; au conseil
+                d&eacute;partemental</span></em><em><span style="font-family:Arial; color:#ff0000;">.</span></em></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><em><span
+                style="font-family:Arial;">A d&eacute;faut d&apos;accord entre tous les int&eacute;ress&eacute;s,
+                l&apos;installation est soumise &agrave; l&apos;autorisation du conseil d&eacute;partemental de
+                l&apos;Ordre</span></em><span style="font-family:Arial;">.</span><span
+            style="font-family:Arial;">&nbsp;</span><span style="font-family:Arial;">&raquo;</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">${clause.checked && "Conform&eacute;ment &agrave; la possibilit&eacute; offerte par les dispositions ci-dessus, le m&eacute;decin remplac&eacute; renonce d&egrave;s &agrave; pr&eacute;sent &agrave; se pr&eacute;valoir de l&rsquo;interdiction d&rsquo;installation pr&eacute;vue &agrave; l&rsquo;article R4127-86 du code de la sant&eacute; publique (code de d&eacute;ontologie m&eacute;dicale) et s&rsquo;engage &agrave; donner au m&eacute;decin rempla&ccedil;ant l&rsquo;accord &eacute;ventuellement n&eacute;cessaire de sa part &agrave; son installation et &agrave; notifier cet accord au conseil d&eacute;partemental."}</span></p>
+    <h1 style="margin-top:12pt; margin-bottom:0pt; text-align:justify; page-break-after:avoid; font-size:11pt;"><u><span
+                style="font-family:Arial;">Article 9</span></u><span style="font-family:Arial;">&nbsp;</span><span
+            style="font-family:Arial;">:&nbsp;</span><u><span
+                style="font-family:Arial; font-weight:normal;">Conciliation</span></u></h1>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Tous les litiges ou diff&eacute;rends relatifs notamment &agrave; la
+            validit&eacute;, l&rsquo;interpr&eacute;tation, l&rsquo;ex&eacute;cution ou la r&eacute;solution du
+            pr&eacute;sent contrat, sont soumis avant tout recours &agrave; une conciliation confi&eacute;e au conseil
+            d&eacute;partemental de l&rsquo;Ordre des m&eacute;decins, en application de l&rsquo;article R.4127-56 du
+            code de la sant&eacute; publique (code de d&eacute;ontologie m&eacute;dicale).</span></p>
+    <p style="margin-top:0pt; margin-left:30pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><strong><u><span
+                    style="font-family:Arial;">Article 10</span></u></strong><span
+            style="font-family:Arial;">&nbsp;</span><span style="font-family:Arial;">:&nbsp;</span><u><span
+                style="font-family:Arial;">Arbitrage</span></u><span style="font-family:Arial;">&nbsp;</span><a
+            name="_ftnref7"></a><a href="#_ftn7" style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:7.33pt; color:#000000;"><sup>[7]</sup></span></a></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">En cas d&rsquo;&eacute;chec de la conciliation, les litiges ou diff&eacute;rends
+            relatifs &agrave; la validit&eacute;, l&rsquo;interpr&eacute;tation, l&rsquo;ex&eacute;cution ou la
+            r&eacute;solution du pr&eacute;sent contrat, seront soumis &agrave; l&rsquo;arbitrage conform&eacute;ment au
+            r&egrave;glement d&rsquo;arbitrage de la Chambre nationale d&rsquo;arbitrage des m&eacute;decins .</span>
+    </p>
+    <p style="margin-top:0pt; margin-left:30pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-left:30pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><u><span
+                style="font-family:Arial;">1</span></u><u><span
+                style="font-family:Arial; font-size:7.33pt;"><sup>&egrave;re</sup></span></u><u><span
+                style="font-family:Arial;"> option</span></u><u><span style="font-family:Arial;">&nbsp;</span></u><span
+            style="font-family:Arial;">:</span></p>
+    <p style="margin-top:0pt; margin-left:30pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">D&egrave;s &agrave; pr&eacute;sent, les parties conviennent</span><span
+            style="font-family:Arial;">&nbsp;</span><span style="font-family:Arial;">de soumettre leur litige
+            &agrave;</span><span style="font-family:Arial;">&nbsp;</span><span style="font-family:Arial;">un arbitre
+            unique.&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-indent:30pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Le tribunal arbitral statuera avec les pouvoirs d&rsquo;amiable
+            compositeur.</span><a name="_ftnref8"></a><a href="#_ftn8" style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:7.33pt; color:#000000;"><sup>[8]</sup></span></a></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-indent:30pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Les parties peuvent faire appel de la sentence arbitrale.</span></p>
+    <p style="margin-top:0pt; margin-left:30pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-indent:30pt; text-align:justify; font-size:11pt;"><u><span
+                style="font-family:Arial;">2&egrave;me option</span></u><span
+            style="font-family:Arial;">&nbsp;</span><span style="font-family:Arial;">:</span></p>
+    <p style="margin-top:0pt; margin-left:30pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">D&egrave;s &agrave; pr&eacute;sent, les parties conviennent de soumettre leur
+            litige &agrave; trois arbitres d&eacute;sign&eacute;s selon les modalit&eacute;s d&eacute;finies &agrave;
+            l&rsquo;article 4 du r&egrave;glement d&rsquo;arbitrage de la Chambre nationale d&rsquo;arbitrage des
+            m&eacute;decins.</span></p>
+
+
+
+            
+
+        </div>
+        <div class="page">
+
+
+
+    <p style="margin-top:0pt; margin-left:30pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Le tribunal arbitral statuera avec les pouvoirs d&rsquo;amiable
+            compositeur.</span><a name="_ftnref9"></a><a href="#_ftn9" style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:7.33pt; color:#000000;"><sup>[9]</sup></span></a></p>
+                <p style="margin-top:0pt; margin-left:30pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Les parties renoncent &agrave; la possibilit&eacute; de faire appel.&nbsp;</span>
+    </p>
+    <h1 style="margin-top:12pt; margin-bottom:12pt; text-align:justify; page-break-after:avoid; font-size:11pt;"><span
+            style="font-family:Arial; font-weight:normal;">Le si&egrave;ge de la Chambre nationale d&rsquo;arbitrage des
+            m&eacute;decins est fix&eacute; &agrave; PARIS 17</span><span
+            style="font-family:Arial; font-size:7.33pt; font-weight:normal;"><sup>&egrave;me</sup></span><span
+            style="font-family:Arial; font-weight:normal;">, 4 rue L&eacute;on JOST.</span></h1>
+
+
+    <h1 style="margin-top:12pt; margin-bottom:0pt; text-align:justify; page-break-after:avoid; font-size:11pt;"><u><span
+                style="font-family:Arial;">Article 11</span></u></h1>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Les parties affirment sur l&apos;honneur n&apos;avoir pass&eacute; aucune
+            contre-lettre ou avenant relatif au pr&eacute;sent contrat qui ne soit soumis au conseil
+            d&eacute;partemental.</span></p>
+    <h1 style="margin-top:12pt; margin-bottom:0pt; text-align:justify; page-break-after:avoid; font-size:11pt;"><u><span
+                style="font-family:Arial;">Article 12</span></u></h1>
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-bottom:12pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Conform&eacute;ment aux dispositions des articles R.4127-65 et 91 du code de la
+            sant&eacute; publique (code de d&eacute;ontologie m&eacute;dicale), ce contrat sera communiqu&eacute; au
+            conseil d&eacute;partemental de l&apos;Ordre avant le d&eacute;but du remplacement.</span></p>
+    <p style="margin-top:12pt; margin-bottom:24pt; text-align:justify; font-size:11pt;"><span
+            style="font-family:Arial;">Son renouvellement sera soumis &agrave; ces m&ecirc;mes dispositions.</span></p>
+    <p style="margin-top:24pt; margin-left:212.7pt; margin-bottom:0pt; font-size:11pt;"><span
+            style="font-family:Arial;">Fait en trois exemplaires</span></p>
+    <p style="margin-top:0pt; margin-left:212.7pt; margin-bottom:0pt; font-size:11pt;"><span
+            style="font-family:Arial;">(dont un pour le conseil d&eacute;partemental)</span></p>
+    <p style="margin-top:0pt; margin-left:212.7pt; margin-bottom:0pt; font-size:11pt;"><span
+            style="font-family:Arial;">Le</span></p>
+    <p style="margin-top:0pt; margin-left:198.45pt; margin-bottom:0pt; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-left:198.45pt; margin-bottom:0pt; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <p style="margin-top:0pt; margin-left:198.45pt; margin-bottom:0pt; font-size:11pt;"><span
+            style="font-family:Arial;">&nbsp;</span></p>
+    <div style="text-align:center;">
+        <table cellspacing="0" cellpadding="0"
+            style="width:517.55pt; margin-right:auto; margin-left:auto; border-collapse:collapse;">
+            <tbody>
+                <tr>
+                    <td style="width:258.65pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:middle;">
+                        <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; font-size:11pt;"><span
+                                style="font-family:Arial; font-size:10pt;">${drx.value}</span><span
+                                style="font-family:Arial;"></span></p>
+                    </td>
+                    <td style="width:237.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:middle;">
+                        <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; font-size:11pt;"><span
+                                style="font-family:Arial; font-size:10pt;">${dry.value}</span><span
+                                style="font-family:Arial;"></span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:258.65pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:middle;">
+                        <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; font-size:11pt;"><span
+                                style="font-family:Arial;">&nbsp;</span></p>
+                    </td>
+                    <td style="width:237.3pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:middle;">
+                        <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; font-size:11pt;"><span
+                                style="font-family:Arial;">&nbsp;</span></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p style="margin-top:24pt; margin-bottom:0pt; font-size:11pt;"><span style="font-family:Arial;">&nbsp;</span></p>
+    <div style="clear:both;">
+        <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; line-height:12pt;"><span
+                style="font-family:Tahoma; font-size:9pt; color:#0000ff;">CNOM &ndash; contrat de remplacement par un
+                m&eacute;decin</span></p>
+        <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; line-height:12pt;"><span
+                style="font-family:Courier; font-size:12pt;">&nbsp;</span></p>
+
+    </div>
+
+<hr style="width:33%; height:1px; text-align:left;">
+<div id="_ftn1">
+    <p style="margin-top:0pt; margin-bottom:0pt;"><a href="#_ftnref1" style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:6.67pt; color:#000000;"><sup>[1]</sup></span></a><span
+            style="font-family:Arial;">&nbsp;</span><span style="font-family:Arial; font-size:8pt;">Il est
+            recommand&eacute; que les modalit&eacute;s habituelles de fonctionnement du cabinet soient
+            pr&eacute;cis&eacute;es &agrave; la/au rempla&ccedil;ant(e), dans le souci de la permanence des
+            soins.</span></p>
+</div>
+<div id="_ftn2">
+    <p style="margin-top:0pt; margin-left:11.35pt; margin-bottom:0pt; text-indent:-11.35pt; text-align:justify;"><a
+            href="#_ftnref2" style="text-decoration:none;"><span
+                style="font-size:6.67pt; color:#000000;"><sup>[2]</sup></span></a> <span
+            style="font-family:Arial; font-size:8pt;">Cette activit&eacute; personnelle ne devra en aucun cas &ecirc;tre
+            pr&eacute;judiciable &agrave; la permanence des soins au sein du cabinet du m&eacute;decin
+            remplac&eacute;(e), activit&eacute; justificative de l&apos;&eacute;tablissement dudit contrat et ne pourra
+            jamais &ecirc;tre une activit&eacute; de soins donnant lieu &agrave; d&eacute;livrance de feuilles de
+            maladie ; il ne peut s&apos;agir que de m&eacute;decine de pr&eacute;vention, d&apos;examens pour des
+            compagnies d&apos;assurances ... qui entrent dans l&apos;activit&eacute; habituelle de la/du
+            rempla&ccedil;ant(e).</span></p>
+</div>
+<div id="_ftn3">
+    <p style="margin-top:0pt; margin-bottom:0pt;"><a href="#_ftnref3" style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:6.67pt; color:#000000;"><sup>[3]</sup></span></a><span
+            style="font-family:Arial;">&nbsp;</span><span style="font-family:Arial; font-size:8pt;">Clause facultative,
+            &agrave; d&eacute;battre entre les signataires ; elle devra faire l&apos;objet d&apos;une annexe au
+            pr&eacute;sent contrat.</span></p>
+</div>
+<div id="_ftn4">
+    <p style="margin-top:0pt; margin-bottom:0pt;"><a href="#_ftnref4" style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:6.67pt; color:#000000;"><sup>[4]</sup></span></a><span
+            style="font-family:Arial;">&nbsp;</span><span style="font-family:Arial; font-size:8pt;">Il serait
+            souhaitable que la copie de cette assurance soit jointe au pr&eacute;sent contrat.</span></p>
+</div>
+<div id="_ftn5">
+    <p style="margin-top:0pt; margin-bottom:0pt;"><a href="#_ftnref5" style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:6.67pt; color:#000000;"><sup>[5]</sup></span></a><span
+            style="font-family:Arial;">&nbsp;</span><span style="font-family:Arial; font-size:8pt;">Carte de
+            professionnel de sant&eacute;.</span></p>
+</div>
+<div id="_ftn6">
+    <p style="margin-top:0pt; margin-bottom:0pt;"><a href="#_ftnref6" style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:6.67pt; color:#000000;"><sup>[6]</sup></span></a><span
+            style="font-family:Arial;">&nbsp;</span><span style="font-family:Arial; font-size:8pt;">Le taux de
+            r&eacute;trocession d&rsquo;honoraires doit &ecirc;tre en rapport avec les charges du cabinet.</span></p>
+</div>
+<div id="_ftn7">
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify;"><a href="#_ftnref7"
+            style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:6.67pt; color:#000000;"><sup>[7]</sup></span></a><span
+            style="font-family:Arial;">&nbsp;</span><span style="font-family:Arial; font-size:8pt;">La clause
+            d&rsquo;arbitrage (clause compromissoire) est facultative et les parties peuvent d&eacute;cider de ne pas y
+            recourir ou encore y recourir dans des conditions diff&eacute;rentes de celles propos&eacute;es
+            ci-dessus.</span></p>
+</div>
+<div id="_ftn8">
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify;"><a href="#_ftnref8"
+            style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:6.67pt; color:#000000;"><sup>[8]</sup></span></a><span
+            style="font-family:Arial;">&nbsp;</span><span style="font-family:Arial; font-size:8pt;">Les parties peuvent
+            renoncer &agrave; cette modalit&eacute; de l&rsquo;arbitrage et, dans ce cas, il suffit de supprimer la
+            mention de l&rsquo;amiable composition</span></p>
+</div>
+<div id="_ftn9">
+    <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify;"><a href="#_ftnref9"
+            style="text-decoration:none;"><span
+                style="font-family:Arial; font-size:6.67pt; color:#000000;"><sup>[9]</sup></span></a><span
+            style="font-family:Arial;">&nbsp;</span><span style="font-family:Arial; font-size:8pt;">Les parties peuvent
+            renoncer &agrave; cette modalit&eacute; de l&rsquo;arbitrage et, dans ce cas, il suffit de supprimer la
+            mention de l&rsquo;amiable composition</span></p>
+</div>
+</div>
+
+
+<!-- ... (Les autres notes de bas de page) ... -->
+
+<!-- Bouton flottant "Imprimer" -->
+<button class="floating-print-button" onclick="window.print()">🖨️</button>
+</body>
+</html>
+            `;
+
+            // Création d'un Blob avec le contenu
+            const blob = new Blob([content], { type: 'text/html' });
+
+            // Génération d'une URL temporaire pour le Blob
+            const url = URL.createObjectURL(blob);
+
+            // Création d'un élément <a> pour ouvrir le fichier
+            const a = document.createElement('a');
+            a.href = url;
+            a.target = '_blank'; // Ouvrir dans un nouvel onglet
+            a.click();
+
+            // Libération de l'URL temporaire
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        });
+
+
+
+    </script>
+    
+</body>
+
+</html>
